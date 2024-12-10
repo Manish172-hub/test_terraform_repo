@@ -9,10 +9,15 @@ data "aws_ami" "app_ami" {
   }
 }
 
-# Create an AWS Key Pair
+# Create an AWS Key Pair (Assuming the key pair already exists)
 resource "aws_key_pair" "mykey" {
   key_name   = "myfusionkey"
   public_key = file("/var/lib/jenkins/.ssh/id_rsa.pub") # Ensure this path is correct
+
+  # Prevent Terraform from attempting to recreate the key pair if it exists
+  lifecycle {
+    ignore_changes = [key_name]
+  }
 }
 
 # Launch an EC2 Instance
