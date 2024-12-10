@@ -45,3 +45,9 @@ resource "aws_key_pair" "mykey" {
   //public_key = file("${path.module}/id_ed25519.pub")
   public_key = file("/var/lib/jenkins/.ssh/id_rsa.pub")   //key for ec2 on created on jenkins user and share path
 }
+
+
+provider "aws" {
+  region  = "us-west-2" # Replace with your desired region
+  profile = "default"   # Optional, replace with your AWS CLI profile
+}
