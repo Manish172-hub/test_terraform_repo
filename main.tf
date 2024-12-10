@@ -18,6 +18,7 @@ resource "aws_key_pair" "mykey" {
 
   # Prevent Terraform from attempting to recreate the key pair if it exists
   lifecycle {
+    create_before_destroy = true
     ignore_changes = [key_name] # Ignore changes to key_name
   }
 }
@@ -82,6 +83,7 @@ resource "aws_security_group" "ssh_access_1" {
 
   # Prevent Terraform from trying to recreate the security group if it exists
   lifecycle {
+    prevent_destroy = true
     ignore_changes = [name, ingress, egress] # Ignore changes to the security group name and rules
   }
 }
