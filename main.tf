@@ -71,7 +71,8 @@ resource "aws_security_group" "ssh_access_1" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["52.13.125.87/32"] # Replace with Jenkins server's public IP
+    //cidr_blocks = ["52.13.125.87/32"] # Replace with Jenkins server's public IP
+    cidr_blocks = [format("%s/32", aws_instance.instance-1.public_ip)] # Replace with Jenkins server's public IP
   }
 
   egress {
