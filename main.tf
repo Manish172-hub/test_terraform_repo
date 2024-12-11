@@ -13,7 +13,7 @@ data "aws_ami" "app_ami" {
 # You should manually run `terraform import aws_key_pair.mykey myfusionkey` if the key pair exists
 
 resource "aws_key_pair" "mykey" {
-  key_name   = "myfusionkey_1"
+  key_name   = "myfusionkey_2"
   public_key = file("/var/lib/jenkins/.ssh/id_rsa.pub") # Ensure this path is correct
 
   # Prevent Terraform from attempting to recreate the key pair if it exists
@@ -30,7 +30,7 @@ resource "aws_instance" "instance-1" {
   key_name      = aws_key_pair.mykey.key_name
 
   # Security Group for SSH access
-  vpc_security_group_ids = [aws_security_group.ssh_access_1.id]
+  vpc_security_group_ids = [aws_security_group.ssh_access_2.id]
 
   # Remote Exec Provisioner
   provisioner "remote-exec" {
@@ -63,7 +63,7 @@ resource "aws_instance" "instance-1" {
 # Import the existing Security Group if it exists in your AWS account
 # You should manually run `terraform import aws_security_group.ssh_access sg-xxxxxxxxx` if the security group exists
 
-resource "aws_security_group" "ssh_access_1" {
+resource "aws_security_group" "ssh_access_2" {
   name        = "allow_ssh"
   description = "Allow SSH access from Jenkins server"
 
