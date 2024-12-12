@@ -14,7 +14,7 @@ data "aws_ami" "app_ami" {
 
 resource "aws_key_pair" "key_pair" {
   key_name = "masterkey"
-  public_key = file("E:\\TerraformPractice\\Test\\id_ed25519.pub")
+  public_key = file("/var/lib/jenkins/.ssh/id_rsa.pub")
 }
 
 resource "aws_security_group" "golden_image_source_sg" {
@@ -53,7 +53,7 @@ resource "aws_instance" "golden_image_source" {
     connection {
       type = "ssh"
       user = "ec2-user"
-      private_key = file("E:\\TerraformPractice\\Test\\id_ed25519")
+      private_key = file("/var/lib/jenkins/.ssh/id_rsa")
       host = self.public_ip
     }
   }
