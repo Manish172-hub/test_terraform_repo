@@ -12,9 +12,9 @@ data "aws_ami" "app_ami" {
 # Import the existing Key Pair if it exists in your AWS account
 # You should manually run `terraform import aws_key_pair.mykey myfusionkey` if the key pair exists
 
-resource "aws_key_pair" "mykey" {
-  key_name   = "myfusionkey_2"
-  public_key = file("/var/lib/jenkins/.ssh/id_rsa.pub") # Ensure this path is correct
+resource "aws_key_pair" "id_ed25519" {
+  key_name   = "id_ed25519.pub"
+  public_key =  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICis5L8i8qVZswfRtpaYQlsP0x5PndxDT/ZkNL3he1dp User@LAPTOP-G492FC2B"   # Ensure this path is correct
 
   # Prevent Terraform from attempting to recreate the key pair if it exists
   lifecycle {
@@ -27,7 +27,7 @@ resource "aws_key_pair" "mykey" {
 resource "aws_instance" "instance-1" {
   ami           = data.aws_ami.app_ami.id
   instance_type = "t2.micro"
-  key_name      = aws_key_pair.mykey.key_name
+  key_name      = aws_key_pair.id_ed25519.key_name
 
   # Security Group for SSH access
   vpc_security_group_ids = [aws_security_group.ssh_access_2.id]
