@@ -68,9 +68,9 @@ resource "aws_security_group" "ssh_access_2" {
   description = "Allow SSH access from Jenkins server"
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["34.212.198.14/32"] # Replace with Jenkins server's public IP
     //cidr_blocks = [format("%s/32", aws_instance.instance-1.public_ip)] # Replace with Jenkins server's public IP
   }
