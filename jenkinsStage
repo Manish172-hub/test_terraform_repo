@@ -1,0 +1,29 @@
+#stages in terraform
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'test', url: 'https://github.com/Manish172-hub/test_terraform_repo.git'
+            }
+        }
+        stage('Terraform Init') { // Move this stage inside the stages block
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan -out=myplan_$BUILD_NUMBER'
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply -input=false myplan_$BUILD_NUMBER'
+            }
+        }
+
+    }
+}
