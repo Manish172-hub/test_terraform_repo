@@ -8,6 +8,7 @@
         <version>8.2.22-SNAPSHOT</version>
         <name>Java Home myweb</name>
         <url>http://maven.apache.org</url>
+        <test>Test Data</test>
         <build>
           <plugins>
              <plugin>
