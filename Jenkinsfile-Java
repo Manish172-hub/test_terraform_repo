@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+               // git 'https://github.com/Manish172-hub/sonar.git'
+              git 'https://github.com/Manish172-hub/test_terraform_repo.git'
+            }
+        }
+        stage('maven build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
