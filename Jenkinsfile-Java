@@ -8,7 +8,7 @@ pipeline {
               git 'https://github.com/Manish172-hub/test_terraform_repo.git'
             }
         }
-        stage('maven builds') {
+        stage('maven build') {
             steps {
                 sh 'mvn clean package'
             }
